@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for i in `find ~/r/dotfiles -type f -depth 1 -exec basename {} \;`; do
+for i in `find ~/r/dotfiles -type f -exec basename {} \;`; do
 
     if [ `echo ${i} | cut -c 1-1` != "." ]; then
         continue
