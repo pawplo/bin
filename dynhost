@@ -1,0 +1,63 @@
+#!/bin/sh
+
+USERNAME=`cat ~/s/.dynhost_username`
+PASSWORD=`cat ~/s/.dynhost_password`
+HOSTNAME="home.hackertech.pl"
+IP_HOME=`echo ~/`
+
+NEWIP=''
+
+check_ip () {
+  echo $1
+  NEWIP=`wget -O - --timeout=10 --tries=1 $1 2>/dev/null`
+  return $?
+}
+
+check_ip "ip.hackertech.pl"
+#echo "ip.hackertech.pl"
+#NEWIP=`wget -O - http://ip.hackertech.pl 2>/dev/null`
+
+if test $? != 0; then
+  ckeck_ip "http://myip.dnsomatic.com"
+#  echo "http://myip.dnsomatic.com"
+#  NEWIP=`wget -O - http://myip.dnsomatic.com 2>/dev/null`
+fi;
+
+if test $? != 0; then
+  ckeck_ip "http://ip1.dynupdate.no-ip.com"
+#  echo "http://ip1.dynupdate.no-ip.com"
+#  NEWIP=`wget -O - http://ip1.dynupdate.no-ip.com 2>/dev/null`
+fi;
+
+if test $? != 0; then
+  check_ip "http://api.ipify.org"
+#  echo "http://api.ipify.org"
+#  NEWIP=`wget -O - http://api.ipify.org 2>/dev/null`
+fi;
+
+if test $? != 0; then
+  check_ip "http://whatismyip.akamai.com"
+#  echo "http://whatismyip.akamai.com"
+#  NEWIP=`wget -O - http://whatismyip.akamai.com 2>/dev/null`
+fi;
+
+if test $? != 0; then
+  echo "dig +short myip.opendns.com @resolver4.opendns.com"
+  NEWIP=`dig +short myip.opendns.com @resolver4.opendns.com`
+fi;
+
+#NEWIP=`cat ${IP_HOME}new.ip`
+OLDIP=''
+
+if test -f ${IP_HOME}old.ip; then
+    OLDIP=`cat ${IP_HOME}old.ip`
+fi;
+
+echo "NEWIP="$NEWIP" OLDIP="$OLDIP
+
+if [ "$OLDIP" != "$NEWIP" ]; then
+    TO="https://www.ovh.com/nic/update?system=dyndns&hostname=$HOSTNAME&myip=$NEWIP"
+    wget --user="$USERNAME" --password="$PASSWORD" -O /tmp/dyn.log "$TO" &>/dev/null
+    echo $NEWIP > ${IP_HOME}old.ip
+    echo $NEWIP >> ${IP_HOME}old.ips
+fi

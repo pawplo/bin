@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for i in `seq 1 254`; do
+    echo $i
+    nc 10.10.10.$i 80 &
+done;
+
+sleep 2
+echo done
+killall -9 nc

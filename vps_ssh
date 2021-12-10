@@ -1,0 +1,5 @@
+#!/bin/sh
+
+vps_knock
+
+ssh root@`cat ~/ip_vps.txt`

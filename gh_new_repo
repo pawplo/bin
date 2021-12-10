@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git gh-new-repo
+git gh-remote-github
+git push --set-upstream github master

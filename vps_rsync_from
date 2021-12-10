@@ -1,0 +1,6 @@
+#!/bin/sh
+
+IP=`cat ~/ip_vps.txt`
+
+vps_knock
+rsync -lvrP root@${IP}:~/vps/ ./

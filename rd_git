@@ -1,0 +1,20 @@
+#!/bin/sh
+
+BASENAME=`cat .cryptogit_name 2>/dev/null`
+if [ $? -ne 0 ]; then
+    PWD=`pwd`
+    BASENAME=`basename $PWD`
+fi;
+
+CRYPTOGIT_SSH=`cat $HOME/.cryptogit_ssh 2>/dev/null`
+if [ $? -ne 0 ]; then
+    echo $HOME/.cryptogit_ssh !!!
+    return 1
+fi;
+
+echo "######## $BASENAME"
+
+rsync -lrt --out-format="%o %b %f" $CRYPTOGIT_SSH:~/a/$BASENAME/.cryptogit .
+
+echo "########"
+

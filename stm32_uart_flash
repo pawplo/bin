@@ -1,0 +1,3 @@
+#!/bin/sh
+
+stm32flash -i -rts,dtr,-dtr,:rts,dtr,-dtr -b 115200 /dev/tty.usbserial-*

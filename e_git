@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "######## cryptodir"
+
+if [ ! -f .cryptogit ]; then
+
+    echo "mkdir .cryptogit"
+    mkdir .cryptogit
+
+    echo "touch .cryptogit/.cryptodir_enc"
+    touch .cryptogit/.cryptodir_enc
+fi
+
+
+cryptodir enc `cat $HOME/.cryptogit_key` .git .cryptogit
+

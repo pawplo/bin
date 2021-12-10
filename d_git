@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "######## cryptodir"
+
+
+cryptodir dec `cat $HOME/.cryptogit_key` .cryptogit .git

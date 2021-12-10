@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_144`
+/Users/air/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32CubeProgrammer > /dev/null 2>&1

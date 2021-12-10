@@ -1,0 +1,144 @@
+#!/bin/sh
+
+which tput &>/dev/null
+if [ $? -ne 0 ]; then
+    function tput()
+    {
+        echo -e ""
+    }
+fi;
+
+color_bold=`tput bold`
+color_reset=`tput sgr0`
+
+color_underline=`tput smul`
+color_no_underline=`tput rmul`
+color_blink=`tput blink`
+color_rev=`tput rev`
+
+color_black_f=`tput setaf 0`
+color_red_f=`tput setaf 1`
+color_green_f=`tput setaf 2`
+color_yellow_f=`tput setaf 3`
+color_blue_f=`tput setaf 4`
+color_magenta_f=`tput setaf 5`
+color_cyan_f=`tput setaf 6`
+color_white_f=`tput setaf 7`
+
+color_black_fl=`tput setaf 8`
+color_red_fl=`tput setaf 9`
+color_green_fl=`tput setaf 10`
+color_yellow_fl=`tput setaf 11`
+color_blue_fl=`tput setaf 12`
+color_magenta_fl=`tput setaf 13`
+color_cyan_fl=`tput setaf 14`
+color_white_fl=`tput setaf 15`
+
+color_black_b=`tput setab 0`
+color_red_b=`tput setab 1`
+color_green_b=`tput setab 2`
+color_yellow_b=`tput setab 3`
+color_blue_b=`tput setab 4`
+color_magenta_b=`tput setab 5`
+color_cyan_b=`tput setab 6`
+color_white_b=`tput setab 7`
+
+color_black_bl=`tput setab 8`
+color_red_bl=`tput setab 9`
+color_green_bl=`tput setab 10`
+color_yellow_bl=`tput setab 11`
+color_blue_bl=`tput setab 12`
+color_magenta_bl=`tput setab 13`
+color_cyan_bl=`tput setab 14`
+color_white_bl=`tput setab 15`
+
+unset tput
+
+declare -a color_table_f=(
+    $color_black_f
+    $color_red_f
+    $color_green_f
+    $color_yellow_f
+    $color_blue_f
+    $color_magenta_f
+    $color_cyan_f
+    $color_white_f
+)
+
+declare -a color_table_fl=(
+    $color_black_fl
+    $color_red_fl
+    $color_green_fl
+    $color_yellow_fl
+    $color_blue_fl
+    $color_magenta_fl
+    $color_cyan_fl
+    $color_white_fl
+)
+
+declare -a color_table_b=(
+    $color_black_b
+    $color_red_b
+    $color_green_b
+    $color_yellow_b
+    $color_blue_b
+    $color_magenta_b
+    $color_cyan_b
+    $color_white_b
+)
+
+declare -a color_table_bl=(
+    $color_black_bl
+    $color_red_bl
+    $color_green_bl
+    $color_yellow_bl
+    $color_blue_bl
+    $color_magenta_bl
+    $color_cyan_bl
+    $color_white_bl
+)
+
+color_draw_f()
+{
+    len_minus_1=`expr ${#1} - 1`
+    for i in `seq 0 $len_minus_1`; do
+        j=`expr $i % 6 + 1`
+        echo -n ${color_table_f[$j]}${1:$i:1}
+    done;
+    echo ${color_reset}
+}
+
+color_draw_fl()
+{
+    len_minus_1=`expr ${#1} - 1`
+    for i in `seq 0 $len_minus_1`; do
+        j=`expr $i % 6 + 1`
+        echo -n ${color_table_fl[$j]}${1:$i:1}
+    done;
+    echo ${color_reset}
+}
+color_draw_b()
+{
+    len_minus_1=`expr ${#1} - 1`
+    for i in `seq 0 $len_minus_1`; do
+        j=`expr $i % 6 + 1`
+        echo -n ${color_table_b[$j]}${1:$i:1}
+    done;
+    echo ${color_reset}
+}
+color_draw_bl()
+{
+    len_minus_1=`expr ${#1} - 1`
+    for i in `seq 0 $len_minus_1`; do
+        j=`expr $i % 6 + 1`
+        echo -n ${color_table_bl[$j]}${1:$i:1}
+    done;
+    echo ${color_reset}
+}
+
+color_draw_f "abcdefghijklmnopqrstuvxyz"
+color_draw_fl "abcdefghijklmnopqrstuvxyz"
+color_draw_b "abcdefghijklmnopqrstuvxyz"
+color_draw_bl "abcdefghijklmnopqrstuvxyz"
+
+echo ${color_reset}

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+for i in `find ~/repos/dotfiles -type f -d 1 -exec basename {} \;`; do
+    echo ${i}" "
+
+    if test -f ~/${i}; then
+        echo OK
+    else
+        echo FALSE
+        ln -s ~/repos/dotfiles/${i} ~/${i}
+    fi;
+
+done;

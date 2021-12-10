@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -f "$1.webm" ]; then
+    ffmpeg -i "$1.webm" -qscale 0 "$1.mp4"
+else
+    echo "\"$1.webm\" does not exist."
+fi;
