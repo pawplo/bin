@@ -2,8 +2,8 @@
 
 USERNAME=`cat ~/s/.dynhost_username`
 PASSWORD=`cat ~/s/.dynhost_password`
-HOSTNAME="home.hackertech.pl"
-IP_HOME=`echo ~/`
+HOSTNAME=`cat ~/s/.dynhost_hostname`
+IP_FILE_PREFIX=`echo ~/`
 
 NEWIP=''
 
@@ -46,11 +46,11 @@ if test $? != 0; then
   NEWIP=`dig +short myip.opendns.com @resolver4.opendns.com`
 fi;
 
-#NEWIP=`cat ${IP_HOME}new.ip`
+#NEWIP=`cat ${IP_FILE_PREFIX}new.ip`
 OLDIP=''
 
-if test -f ${IP_HOME}old.ip; then
-    OLDIP=`cat ${IP_HOME}old.ip`
+if test -f ${IP_FILE_PREFIX}old.ip; then
+    OLDIP=`cat ${IP_FILE_PREFIX}old.ip`
 fi;
 
 echo "NEWIP="$NEWIP" OLDIP="$OLDIP
@@ -58,6 +58,6 @@ echo "NEWIP="$NEWIP" OLDIP="$OLDIP
 if [ "$OLDIP" != "$NEWIP" ]; then
     TO="https://www.ovh.com/nic/update?system=dyndns&hostname=$HOSTNAME&myip=$NEWIP"
     wget --user="$USERNAME" --password="$PASSWORD" -O /tmp/dyn.log "$TO" &>/dev/null
-    echo $NEWIP > ${IP_HOME}old.ip
-    echo $NEWIP >> ${IP_HOME}old.ips
+    echo $NEWIP > ${IP_FILE_PREFIX}old.ip
+    echo $NEWIP >> ${IP_FILE_PREFIX}old.ips
 fi

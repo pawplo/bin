@@ -1,15 +1,16 @@
 #!/bin/sh
 
-if [ -z $1]; then
-    echo $0 <name> {0, 1, 2, 3, z, fast}
+if [ -z $1 ]; then
+    echo $0 <name> {0, 1, 2, 3, z, s, fast}
     exit 1;
 fi;
 
-if [ ! -z $2 ]; then
-    if [ $2 != 1 -a $2 != 2 -a $2 != 3 -a $2 != z -a $2 != fast ]; then
-        echo $0 <name> {0, 1, 2, 3, z, fast}
-        exit 1;
-fi;
+#if [ ! -z $2 ]; then
+#    if [ $2 != 1 -a $2 != 2 -a $2 != 3 -a $2 != z -a $2 != fast ]; then
+#        echo $0 <name> {0, 1, 2, 3, z, fast}
+#        exit 1;
+#    fi;
+#fi;
 
 source ~/bin/wasm
 
@@ -25,5 +26,5 @@ echo "------------------"
 #s2wasm $1.s > $1.wast
 #wat2wasm -o $1.wasm $1.wast
 
-#clang --target=wasm32-wasi -O$2 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o $1.wasm $1.c
-clang --target=wasm32 -O$2 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o $1.wasm $1.c
+clang --target=wasm32-wasi -O$2 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o $1.wasm $1.c
+#clang --target=wasm32 -O$2 --no-standard-libraries -Wl,--export-all -Wl,--no-entry -o $1.wasm $1.c
