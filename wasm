@@ -1,5 +1,0 @@
-#!/bin/sh
-
-export PATH="/Users/air/src/emsdk/upstream/bin:$PATH"
-#export PATH="/Users/air/src/emsdk/binaryen/master_64bit_binaryen/bin:$PATH"
-

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "$0 <file>"
+    exit 1
+fi;
+
+expand -4 "$1" > ~/tmp/tabs2spaces
+mv ~/tmp/tabs2spaces "$1"

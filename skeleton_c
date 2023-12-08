@@ -1,0 +1,46 @@
+#!/bin/sh
+
+skeleton_c=`cat << EOL
+#define SKELETON_C
+#include "skeleton.h"
+
+#undef SKELETON_C
+EOL
+`
+
+skeleton_h=`cat << EOL
+#ifndef __SKELETON_H
+#define __SKELETON_H
+
+#if defined SKELETON_C || defined __ALL_C
+#define SKELETON_EXTERN
+#else
+#define SKELETON_EXTERN extern
+#endif
+
+#endif /* __SKELETON_H */
+EOL
+`
+
+if [ -z "$1" ]; then
+    echo "$0 <name>"
+    exit 1;
+fi;
+
+lower_name=`echo "$1" | tr '[:upper:]' '[:lower:]'`
+upper_name=`echo "$1" | tr '[:lower:]' '[:upper:]'`
+
+if [ -f "$1.c" ]; then
+    echo "$1.c exists."
+#    echo "${skeleton_c}" | sed 's/skeleton/'$lower_name'/g' | sed 's/SKELETON/'$upper_name'/g' >> ${lower_name}.c
+else
+    echo "${skeleton_c}" | sed 's/skeleton/'$lower_name'/g' | sed 's/SKELETON/'$upper_name'/g' > ${lower_name}.c
+fi;
+
+if [ -f "$1.h" ]; then
+    echo "$1.h exists."
+#    echo "${skeleton_h}" | sed 's/skeleton/'$lower_name'/g' | sed 's/SKELETON/'$upper_name'/g' >> ${lower_name}.h
+else
+    echo "${skeleton_h}" | sed 's/skeleton/'$lower_name'/g' | sed 's/SKELETON/'$upper_name'/g' > ${lower_name}.h
+fi;
+

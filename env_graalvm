@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/graalvm-jdk-21+35.1/Contents/Home"
+    export PATH="/Library/Java/JavaVirtualMachines/graalvm-jdk-21+35.1/Contents/Home/bin:$PATH"
+    export PS1="[graalvm] $PS1"
+else
+    echo "???"
+fi;

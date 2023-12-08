@@ -1,0 +1,67 @@
+#!/bin/sh
+
+run()
+{
+    echo $*
+    $*
+    if [ $? -eq 1 ]; then
+        exit
+    fi;
+}
+
+check_file_exists()
+{
+    if [ ! -f $1 ]; then
+        echo "! -f $1"
+        exit
+    fi;
+}
+
+name_tar_gz=`basename $1`
+
+if [ "${name_tar_gz: -7}" != ".tar.gz" ]; then
+    echo "use: $0 <slackbuild_url_tar_gz>"
+    exit
+fi;
+
+if [ ! -f ${name_tar_gz} ]; then
+    run wget $1
+fi;
+
+name=${name_tar_gz: 0:-7}
+echo "package [${name}]"
+
+if [ ! -d ${name} ]; then
+    run tar -xzf ${name_tar_gz}
+fi;
+
+run cd ${name}
+
+check_file_exists ./${name}.info
+#if [! -f ./${name}.info ]; then
+#    echo "! -f /${name}.info"
+#    exit
+#fi;
+source ./${name}.info
+
+echo ${DOWNLOAD}
+download_file=${DOWNLOAD##*/}
+if [ ! -f ${download_file} ]; then
+    run wget ${DOWNLOAD}
+fi;
+
+if [ `md5sum ${download_file} | cut -d ' ' -f 1-1` != ${MD5SUM} ]; then
+    echo !!! ${MD5SUM}
+    exit
+fi;
+
+check_file_exists ./${name}.SlackBuild
+#if [! -f ./${name}.SlackBuild ]; then
+#    echo "! -f /${name}.SlackBuild"
+#    exit
+#fi;
+
+run chmod +x ${name}.SlackBuild
+run ./${name}.SlackBuild
+
+echo "REQUIRES=\""${REQUIRES}"\""

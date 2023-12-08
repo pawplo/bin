@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export PATH="/opt/pkg/gcc13/bin:$PATH"
+    export PS1="[pkg_gcc13] $PS1"
+else
+    echo "???"
+fi;
+

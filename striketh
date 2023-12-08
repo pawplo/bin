@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+for i in $*; do
+    echo -en "\e[9m${i}\e[0m "
+done;
+echo

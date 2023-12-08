@@ -2,14 +2,14 @@
 if [ -f ~/.air ]; then
     echo "*** air ***"
 ###16.0.2 (x86_64) "Oracle Corporation" - "Java SE 16.0.2" /Library/Java/JavaVirtualMachines/jdk-16.0.2.jdk/Contents/Home
-#export JAVA_HOME=`/usr/libexec/java_home -v 16.0.2`
+#---export JAVA_HOME=`/usr/libexec/java_home -v 16.0.2`
 
 ###1.8.0_144 (x86_64) "Oracle Corporation" - "Java SE 8" /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_144`
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_144`
 
-#export JAVA_HOME=/opt/pkg/java/adoptopenjdk11-bin
+export JAVA_HOME=/opt/pkg/java/adoptopenjdk11-bin
 
-/Users/air/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32CubeProgrammer > /dev/null 2>&1
+~/Applications/STM32CubeMX.app/Contents/Resources/STM32CubeMX > /dev/null 2>&1
 
 #elif [ -f ~/.thinkpad_debian ]; then
 #    echo "*** thinpad_debian ***"
@@ -17,4 +17,3 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_144`
 else
     echo "???"
 fi;
-

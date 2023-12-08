@@ -1,13 +1,17 @@
 #!/bin/sh
 
-for i in `find ~/repos/dotfiles -type f -d 1 -exec basename {} \;`; do
-    echo ${i}" "
+for i in `find ~/r/dotfiles -type f -exec basename {} \;`; do
 
+    if [ `echo ${i} | cut -c 1-1` != "." ]; then
+        continue
+    fi;
+
+    echo ${i}" "
     if test -f ~/${i}; then
         echo OK
     else
         echo FALSE
-        ln -s ~/repos/dotfiles/${i} ~/${i}
+        ln -s ~/r/dotfiles/${i} ~/${i}
     fi;
 
 done;

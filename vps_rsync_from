@@ -1,6 +1,14 @@
 #!/bin/sh
 
-IP=`cat ~/ip_vps.txt`
+if [ "$1" == "" ]; then
+    echo "$0 <name>"
+    exit 1
+fi;
 
-vps_knock
-rsync -lvrP root@${IP}:~/vps/ ./
+IP=`cat ~/ip_$1.txt`
+if [ "$?" != "0" ]; then
+    echo "error: cat ~/ip_$1.txt"
+    exit 1
+fi;
+
+rsync -lvrP --exclude '.git' root@${IP}:~/vps/ ~/r/vps/

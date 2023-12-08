@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ ! -f ${1}.csv ]; then
+    echo "missing ${1}.csv file."
+    exit 1;
+fi;
+
+rm ${1}.db
+
+eval "(echo .separator \;; echo .import ${1}.csv table_name; echo .exit) | sqlite3 ${1}.db"

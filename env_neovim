@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export PATH="${HOME}/neovim/nvim-macos/bin:$PATH"
+    export PS1="[neovim] $PS1"
+else
+    echo "???"
+fi;
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+last_comment=`git log -1 --pretty=%B | head -1`
+next_comment=`expr 1 + $last_comment`
+if [ $? == 0 ]; then
+    echo "git_acpn OK "$next_comment
+    git_acp $next_comment
+else
+    echo "git_acpc FAIL"
+fi;

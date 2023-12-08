@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "cp postfix remove"
+
+if [ ! -f "$1$2" -o  -z "$2" ]; then
+    echo "$0 <file_without_postfix> <postfix>"
+    exit 1
+fi;
+
+echo cp "$1$2" "$1"
+cp "$1$2" "$1"

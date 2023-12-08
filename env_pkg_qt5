@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export PATH="/opt/pkg/qt5/bin:$PATH"
+    export PS1="[pkg_qt5] $PS1"
+else
+    echo "???"
+fi;
+

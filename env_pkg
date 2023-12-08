@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export LDFLAGS="-L/opt/pkg/lib $LDFLAGS"
+    export CFLAGS="-I/opt/pkg/include $CFLAGS"
+    export CPPFLAGS="-I/opt/pkg/include $CPPFLAGS"
+    export PKG_CONFIG_PATH="/opt/pkg/lib/pkgconfig:$PKG_CONFIG_PATH"
+    export PATH="/opt/pkg/bin:$PATH"
+    export PS1="[pkg] $PS1"
+else
+    echo "???"
+fi;

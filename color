@@ -1,11 +1,11 @@
 #!/bin/sh
 
-which tput &>/dev/null
+which tput >/dev/null 2>/dev/null
 if [ $? -ne 0 ]; then
-    function tput()
-    {
-        echo -e ""
-    }
+tput()
+{
+    echo -e ""
+}
 fi;
 
 color_bold=`tput bold`
@@ -53,92 +53,3 @@ color_cyan_bl=`tput setab 14`
 color_white_bl=`tput setab 15`
 
 unset tput
-
-declare -a color_table_f=(
-    $color_black_f
-    $color_red_f
-    $color_green_f
-    $color_yellow_f
-    $color_blue_f
-    $color_magenta_f
-    $color_cyan_f
-    $color_white_f
-)
-
-declare -a color_table_fl=(
-    $color_black_fl
-    $color_red_fl
-    $color_green_fl
-    $color_yellow_fl
-    $color_blue_fl
-    $color_magenta_fl
-    $color_cyan_fl
-    $color_white_fl
-)
-
-declare -a color_table_b=(
-    $color_black_b
-    $color_red_b
-    $color_green_b
-    $color_yellow_b
-    $color_blue_b
-    $color_magenta_b
-    $color_cyan_b
-    $color_white_b
-)
-
-declare -a color_table_bl=(
-    $color_black_bl
-    $color_red_bl
-    $color_green_bl
-    $color_yellow_bl
-    $color_blue_bl
-    $color_magenta_bl
-    $color_cyan_bl
-    $color_white_bl
-)
-
-color_draw_f()
-{
-    len_minus_1=`expr ${#1} - 1`
-    for i in `seq 0 $len_minus_1`; do
-        j=`expr $i % 6 + 1`
-        echo -n ${color_table_f[$j]}${1:$i:1}
-    done;
-    echo ${color_reset}
-}
-
-color_draw_fl()
-{
-    len_minus_1=`expr ${#1} - 1`
-    for i in `seq 0 $len_minus_1`; do
-        j=`expr $i % 6 + 1`
-        echo -n ${color_table_fl[$j]}${1:$i:1}
-    done;
-    echo ${color_reset}
-}
-color_draw_b()
-{
-    len_minus_1=`expr ${#1} - 1`
-    for i in `seq 0 $len_minus_1`; do
-        j=`expr $i % 6 + 1`
-        echo -n ${color_table_b[$j]}${1:$i:1}
-    done;
-    echo ${color_reset}
-}
-color_draw_bl()
-{
-    len_minus_1=`expr ${#1} - 1`
-    for i in `seq 0 $len_minus_1`; do
-        j=`expr $i % 6 + 1`
-        echo -n ${color_table_bl[$j]}${1:$i:1}
-    done;
-    echo ${color_reset}
-}
-
-color_draw_f "abcdefghijklmnopqrstuvxyz"
-color_draw_fl "abcdefghijklmnopqrstuvxyz"
-color_draw_b "abcdefghijklmnopqrstuvxyz"
-color_draw_bl "abcdefghijklmnopqrstuvxyz"
-
-echo ${color_reset}

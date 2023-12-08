@@ -1,0 +1,12 @@
+#!/bin/sh
+
+source color
+
+run()
+{
+    echo ${color_green_f}"$*"${color_reset}
+    $*
+#    if [ $? -eq 1 ]; then
+#        exit
+#    fi;
+}

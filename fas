@@ -1,0 +1,24 @@
+#!/bin/sh
+
+#find and search
+
+if [ -z "$1" ]; then
+    echo "$0 <text> [name]"
+    exit 1
+fi;
+
+name=""
+if [ ! -z "$2" ]; then
+name="-name \"$2\""
+fi;
+
+#for f in `find . -type f`; do
+#    g=`grep -e "$1" $f`
+#    if [ ! -z "$g" ]; then
+#        echo $f
+#    fi;
+#done;
+
+e="find . -type f ${name} | search_files.py \"$1\""
+echo ${e}
+eval ${e}

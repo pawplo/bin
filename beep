@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    afplay /System/Library/Sounds/Glass.aiff
+
+elif [ -f ~/.thinkpad_debian ]; then
+    echo "*** thinpad_debian ***"
+    ogg123 /usr/share/sounds/Oxygen-Im-Sms.ogg
+
+elif [ -f ~/.thinkpad_openbsd ]; then
+    echo "*** thinpad_openbsd ***"
+    aucat -i /beep.wav
+
+else
+    echo "???"
+fi;

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+    export PS1="[macports] $PS1"
+else
+    echo "???"
+fi;

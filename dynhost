@@ -1,63 +1,65 @@
 #!/bin/sh
 
-USERNAME=`cat ~/s/.dynhost_username`
-PASSWORD=`cat ~/s/.dynhost_password`
-HOSTNAME="home.hackertech.pl"
-IP_HOME=`echo ~/`
+#USERNAME=`cat ~/s/.dynhost_username`
+#PASSWORD=`cat ~/s/.dynhost_password`
+#HOSTNAME=`cat ~/s/.dynhost_hostname`
+IP_FILE_PREFIX=`echo ~/`
 
 NEWIP=''
 
-check_ip () {
+function check_ip()
+{
   echo $1
   NEWIP=`wget -O - --timeout=10 --tries=1 $1 2>/dev/null`
+  echo "[$NEWIP]"
   return $?
 }
 
-check_ip "ip.hackertech.pl"
-#echo "ip.hackertech.pl"
-#NEWIP=`wget -O - http://ip.hackertech.pl 2>/dev/null`
+#check_ip "ip.hackertech.pl"
+check_ip "https://api.my-ip.io/ip"
+check_ip "https://ipapi.co/ip/"
+check_ip "api.seeip.org"
+check_ip "http://api.ipaddress.com/myip"
 
-if test $? != 0; then
-  ckeck_ip "http://myip.dnsomatic.com"
-#  echo "http://myip.dnsomatic.com"
-#  NEWIP=`wget -O - http://myip.dnsomatic.com 2>/dev/null`
-fi;
 
-if test $? != 0; then
-  ckeck_ip "http://ip1.dynupdate.no-ip.com"
-#  echo "http://ip1.dynupdate.no-ip.com"
-#  NEWIP=`wget -O - http://ip1.dynupdate.no-ip.com 2>/dev/null`
-fi;
 
-if test $? != 0; then
+exit 0
+##########i#############
+
+#if test $? != 0; then
+  check_ip "http://myip.dnsomatic.com"
+#fi;
+
+#if test $? != 0; then
+  check_ip "http://ip1.dynupdate.no-ip.com"
+#fi;
+
+#if test $? != 0; then
   check_ip "http://api.ipify.org"
-#  echo "http://api.ipify.org"
-#  NEWIP=`wget -O - http://api.ipify.org 2>/dev/null`
-fi;
+#fi;
 
-if test $? != 0; then
+#if test $? != 0; then
   check_ip "http://whatismyip.akamai.com"
-#  echo "http://whatismyip.akamai.com"
-#  NEWIP=`wget -O - http://whatismyip.akamai.com 2>/dev/null`
-fi;
+#fi;
 
-if test $? != 0; then
+#if test $? != 0; then
   echo "dig +short myip.opendns.com @resolver4.opendns.com"
   NEWIP=`dig +short myip.opendns.com @resolver4.opendns.com`
-fi;
+  echo "[$NEWIP]"
+#fi;
 
-#NEWIP=`cat ${IP_HOME}new.ip`
-OLDIP=''
+#NEWIP=`cat ${IP_FILE_PREFIX}new.ip`
+#OLDIP=''
 
-if test -f ${IP_HOME}old.ip; then
-    OLDIP=`cat ${IP_HOME}old.ip`
-fi;
+#if test -f ${IP_FILE_PREFIX}old.ip; then
+#    OLDIP=`cat ${IP_FILE_PREFIX}old.ip`
+#fi;
 
-echo "NEWIP="$NEWIP" OLDIP="$OLDIP
+#echo "NEWIP="$NEWIP" OLDIP="$OLDIP
 
-if [ "$OLDIP" != "$NEWIP" ]; then
-    TO="https://www.ovh.com/nic/update?system=dyndns&hostname=$HOSTNAME&myip=$NEWIP"
-    wget --user="$USERNAME" --password="$PASSWORD" -O /tmp/dyn.log "$TO" &>/dev/null
-    echo $NEWIP > ${IP_HOME}old.ip
-    echo $NEWIP >> ${IP_HOME}old.ips
-fi
+#if [ "$OLDIP" != "$NEWIP" ]; then
+#    TO="https://www.ovh.com/nic/update?system=dyndns&hostname=$HOSTNAME&myip=$NEWIP"
+#    wget --user="$USERNAME" --password="$PASSWORD" -O /tmp/dyn.log "$TO" &>/dev/null
+#    echo $NEWIP > ${IP_FILE_PREFIX}old.ip
+#    echo $NEWIP >> ${IP_FILE_PREFIX}old.ips
+#fi

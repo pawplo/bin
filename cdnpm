@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mkdir -p $1
+if [ $? == 0 ]; then
+  echo "mkdir ok"
+  cd $1
+  npm install $1
+else
+  echo "mkdir !!!"
+fi;

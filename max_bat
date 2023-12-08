@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "$0 <max_bat_percentage>"
+    exit 1
+fi;
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    sudo ~/src/osx_battery_charge_limit/smc-command_from_fan_control/smc -k BCLM -w `python -c "print hex($1)[2:]"`
+else
+    echo "!!!"
+fi;

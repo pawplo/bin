@@ -1,0 +1,16 @@
+#!/bin/sh
+
+head_tag=`git describe --tags HEAD`
+next_tag=`expr 1 + $head_tag`
+if [ $? == 0 ]; then
+    echo "$0: NONE"
+else
+    last_tag=`git tag --sort=committerdate | tail -1`
+    next_tag=`expr 1 + $last_tag`
+    if [ $? == 0 ]; then
+        echo "git_tag $next_tag"
+        git tag $next_tag
+    else
+        echo "$0: FAIL"
+    fi;
+fi;

@@ -1,5 +1,14 @@
 #!/bin/sh
 
-vps_knock
+if [ "$1" == "" ]; then
+    echo "$0 <name>"
+    exit 1
+fi;
 
-ssh root@`cat ~/ip_vps.txt`
+IP=`cat ~/ip_$1.txt`
+if [ "$?" != "0" ]; then
+    echo "error: cat ~/ip_$1.txt"
+    exit 1
+fi;
+
+ssh root@${IP}

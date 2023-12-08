@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "$0 <max_fun_RPM>"
+    exit 1
+fi;
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    sudo /Users/air/src/osx_battery_charge_limit/smc-command_from_fan_control/smc -k F0Mx -w `python3 -c "print(hex($1 << 2)[2:])"`
+else
+    echo "!!!"
+fi;
