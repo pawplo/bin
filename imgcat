@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ ! -f $1 ]; then
+    echo "$0 <img>"
+    exit 1
+fi;
+
+echo -e "\x1b]1337;File=[name=$1;inline=1]:"`base64 $1`"\x07"
+
+esc_exit
