@@ -2,6 +2,10 @@
 
 if [ -f ~/.air ]; then
     echo "*** air ***"
+    export LDFLAGS="-L/opt/local/lib $LDFLAGS"
+    export CFLAGS="-I/opt/local/include $CFLAGS"
+    export CPPFLAGS="-I/opt/local/include $CPPFLAGS"
+    export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:$PKG_CONFIG_PATH"
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
     export PS1="[macports] $PS1"
 else
