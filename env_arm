@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+#    export PATH="/Applications/ARM/bin:$PATH"
+    export PATH="/Users/air/arm/arm-gnu-toolchain-13.2.Rel1-darwin-x86_64-arm-none-eabi/bin:$PATH"
+    export PS1="[arm] $PS1"
+else
+    echo "???"
+fi;
