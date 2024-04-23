@@ -9,8 +9,8 @@ IFS=$'\n'
 
 if test -z "$2"; then
     echo "000"
-    for i in `find . -type f`;          do x=`cat "$i" | grep $1`; xx=${#x}; if test $xx -gt 1; then echo $i"\t"$x; fi; done;
+    for i in `find . -type f`;          do x=`cat "$i" | grep "$1"`; xx=${#x}; if test $xx -gt 1; then echo $i"\t"$x; fi; done;
 else
     echo "111"
-    for i in `find . -type f -name $2`; do x=`cat "$i" | grep $1`; xx=${#x}; if test $xx -gt 1; then echo $i"\t"$x; fi; done;
+    for i in `find . -type f -name "$2"`; do x=`cat "$i" | grep "$1"`; xx=${#x}; if test $xx -gt 1; then echo $i"\t"$x; fi; done;
 fi;
