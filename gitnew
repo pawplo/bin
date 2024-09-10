@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "$0 <directory>"
+    exit 1
+fi;
+
+mkdir $1
+cd $1
+git init
