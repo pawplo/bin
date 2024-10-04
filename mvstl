@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mv ~/Downloads/*.stl ~/stl/
+
