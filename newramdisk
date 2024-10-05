@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ -z "$2" ]; then
+    echo "$0 <ramdisk_name> <ramdisk_size>"
+    exit 1
+fi;
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    ramdisk_name=$1
+    ramdisk_size_MB=$2
+
+    ramdisk_device=`hdiutil attach -nobrowse -nomount ram://$((ramdisk_size_MB*2048))`
+    diskutil erasevolume HFS+ $ramdisk_name $ramdisk_device
+
+else
+    echo "???"
+fi;
+
+
