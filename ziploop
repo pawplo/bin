@@ -1,0 +1,32 @@
+#!/bin/sh
+
+expr $2 + 1 > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "$0 <file> <number>"
+    exit
+fi;
+
+i=$2;
+zip x$i.zip $1
+if [ $? -ne 0 ]; then
+    echo "$0: ERROR 1"
+    exit
+fi;
+
+while [ $i -ne 0 ]; do
+    echo $i;
+    new_i=`expr $i - 1`
+    zip x$new_i.zip x$i.zip
+    if [ $? -ne 0 ]; then
+        echo "$0: ERROR 2"
+        exit
+    fi;
+    rm x$i.zip
+    if [ $? -ne 0 ]; then
+        echo "$0: ERROR 3"
+        exit
+    fi;
+    i=$new_i
+done;
+
+mv x0.zip x.zip
