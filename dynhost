@@ -58,19 +58,17 @@ if test $RET != 0; then
   check_ip "http://whatismyip.akamai.com" "wget"
 fi;
 
-#NEWIP=`cat ${IP_FILE_PREFIX}new.ip`
-#OLDIP=''
+OLDIP=''
+if test -f ${IP_FILE_PREFIX}old.ip; then
+    OLDIP=`cat ${IP_FILE_PREFIX}old.ip`
+fi;
 
-#if test -f ${IP_FILE_PREFIX}old.ip; then
-#    OLDIP=`cat ${IP_FILE_PREFIX}old.ip`
-#fi;
+echo "NEWIP="$NEWIP" OLDIP="$OLDIP
 
-#echo "NEWIP="$NEWIP" OLDIP="$OLDIP
-
-#if [ "$OLDIP" != "$NEWIP" ]; then
+if [ "$OLDIP" != "$NEWIP" ]; then
 #    TO="https://www.ovh.com/nic/update?system=dyndns&hostname=$HOSTNAME&myip=$NEWIP"
 #    wget --user="$USERNAME" --password="$PASSWORD" -O /tmp/dyn.log "$TO" &>/dev/null
-#    echo $NEWIP > ${IP_FILE_PREFIX}old.ip
-#    echo $NEWIP >> ${IP_FILE_PREFIX}old.ips
-#fi
+    echo $NEWIP > ${IP_FILE_PREFIX}old.ip
+    echo "$NEWIP - `date`" >> ${IP_FILE_PREFIX}old.ips
+fi
 
