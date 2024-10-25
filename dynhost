@@ -12,8 +12,8 @@ RET=1
 function check_ip()
 {
   if [ "$2" == "wget" ]; then
-    echo "wget -O - --timeout=10 --tries=1 $1 2>/dev/null"
-    NEWIP=`wget -O - --timeout=10 --tries=1 $1 2>/dev/null`
+    echo "wget -O - --timeout=10 $1 2>/dev/null"
+    NEWIP=`wget -O - --timeout=10 $1 2>/dev/null`
   else
     echo "dig +short $1"
     NEWIP=`dig +short $1`
@@ -22,13 +22,9 @@ function check_ip()
   echo "[$NEWIP]"
 }
 
-if test $RET != 0; then
-  check_ip "myip.opendns.com @resolver4.opendns.com" "dig"
-fi;
-
-if test $RET != 0; then
-  check_ip "https://api.my-ip.io/ip" "wget"
-fi;
+#if test $RET != 0; then
+#  check_ip "myip.opendns.com @resolver4.opendns.com" "dig"
+#fi;
 
 if test $RET != 0; then
   check_ip "https://ipapi.co/ip/" "wget"
@@ -56,6 +52,10 @@ fi;
 
 if test $RET != 0; then
   check_ip "http://whatismyip.akamai.com" "wget"
+fi;
+
+if test $RET != 0; then
+  check_ip "https://api.my-ip.io/ip" "wget"
 fi;
 
 OLDIP=''
