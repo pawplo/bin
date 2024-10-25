@@ -7,46 +7,56 @@ IP_FILE_PREFIX=`echo ~/`
 
 NEWIP=''
 
+RET=1
+
 function check_ip()
 {
-  echo $1
-  NEWIP=`wget -O - --timeout=10 --tries=1 $1 2>/dev/null`
+  if [ "$2" == "wget" ]; then
+    echo "wget -O - --timeout=10 --tries=1 $1 2>/dev/null"
+    NEWIP=`wget -O - --timeout=10 --tries=1 $1 2>/dev/null`
+  else
+    echo "dig +short $1"
+    NEWIP=`dig +short $1`
+  fi;
+  RET=$?
   echo "[$NEWIP]"
-  return $?
 }
 
-#check_ip "ip.hackertech.pl"
-check_ip "https://api.my-ip.io/ip"
-check_ip "https://ipapi.co/ip/"
-check_ip "api.seeip.org"
-check_ip "http://api.ipaddress.com/myip"
+if test $RET != 0; then
+  check_ip "myip.opendns.com @resolver4.opendns.com" "dig"
+fi;
 
+if test $RET != 0; then
+  check_ip "https://api.my-ip.io/ip" "wget"
+fi;
 
+if test $RET != 0; then
+  check_ip "https://ipapi.co/ip/" "wget"
+fi;
 
-exit 0
-##########i#############
+if test $RET != 0; then
+  check_ip "api.seeip.org" "wget"
+fi;
 
-#if test $? != 0; then
-  check_ip "http://myip.dnsomatic.com"
-#fi;
+if test $RET != 0; then
+  check_ip "http://api.ipaddress.com/myip" "wget"
+fi;
 
-#if test $? != 0; then
-  check_ip "http://ip1.dynupdate.no-ip.com"
-#fi;
+if test $RET != 0; then
+  check_ip "http://myip.dnsomatic.com" "wget"
+fi;
 
-#if test $? != 0; then
-  check_ip "http://api.ipify.org"
-#fi;
+if test $RET != 0; then
+  check_ip "http://ip1.dynupdate.no-ip.com" "wget"
+fi;
 
-#if test $? != 0; then
-  check_ip "http://whatismyip.akamai.com"
-#fi;
+if test $RET != 0; then
+  check_ip "http://api.ipify.org" "wget"
+fi;
 
-#if test $? != 0; then
-  echo "dig +short myip.opendns.com @resolver4.opendns.com"
-  NEWIP=`dig +short myip.opendns.com @resolver4.opendns.com`
-  echo "[$NEWIP]"
-#fi;
+if test $RET != 0; then
+  check_ip "http://whatismyip.akamai.com" "wget"
+fi;
 
 #NEWIP=`cat ${IP_FILE_PREFIX}new.ip`
 #OLDIP=''
@@ -63,3 +73,4 @@ exit 0
 #    echo $NEWIP > ${IP_FILE_PREFIX}old.ip
 #    echo $NEWIP >> ${IP_FILE_PREFIX}old.ips
 #fi
+
