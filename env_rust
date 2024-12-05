@@ -2,8 +2,8 @@
 
 if [ -f ~/.air ]; then
     echo "*** air ***"
-    export PATH="/Users/air/zig:$PATH"
-    export PS1="[zig] $PS1"
+    export PATH="$HOME/.cargo/bin:$PATH"
+    export PS1="[rust] $PS1"
 else
     echo "???"
 fi;
