@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sigrok-cli --driver fx2lafw --channels D0 --config "samplerate=200000" --samples=10000 -O bits:width=128 -t D0=f
+
