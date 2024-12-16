@@ -9,7 +9,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_144`
 
 #export JAVA_HOME=/opt/pkg/java/adoptopenjdk11-bin
 
-/Users/air/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32CubeProgrammer > /dev/null 2>&1
+/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer2/STM32CubeProgrammer.app/Contents/MacOs/bin/STM32CubeProgrammer > /dev/null 2>&1
 
 #elif [ -f ~/.thinkpad_debian ]; then
 #    echo "*** thinpad_debian ***"
