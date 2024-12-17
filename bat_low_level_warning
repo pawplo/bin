@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -f /Users/air/.air ]; then
+    bat_level=`pmset -g batt | grep -o '\d\+%' | grep -o '\d\+'`
+    if [ $bat_level -lt 60 ]; then
+        afplay /System/Library/Sounds/Sosumi.aiff
+        afplay /System/Library/Sounds/Sosumi.aiff
+        afplay /System/Library/Sounds/Sosumi.aiff
+    fi;
+else
+    echo "???"
+fi;
+
