@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ioreg -p IOUSB -l -w 0
+
