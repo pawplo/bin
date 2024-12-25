@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ -z "$2" ]; then
-    echo "$0 <ramdisk_name> <ramdisk_size>"
+    echo "$0 <ramdisk_name> <ramdisk_size_MB>"
     exit 1
 fi;
 

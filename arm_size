@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "[elf: $1]"
+
+arm-none-eabi-size --format=sysv $1
+

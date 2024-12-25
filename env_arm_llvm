@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    export PATH="/Applications/LLVM-ET-Arm-19.1.5-Darwin-universal/bin:$PATH"
+    export LDFLAGS="-L/Applications/LLVM-ET-Arm-19.1.5-Darwin-universal/lib/clang-runtimes/arm-none-eabi/armv6m_soft_nofp/lib $LDFLAGS"
+    export PS1="[arm_llvm] $PS1"
+else
+    echo "???"
+fi;
+

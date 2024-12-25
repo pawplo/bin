@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "[elf: $1]"
+
+arm-none-eabi-nm --print-size --size-sort $1
+

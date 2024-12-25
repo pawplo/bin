@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "[hex: $1]"
+
+stm32_programmer_cli -c port=SWD -w "$1" 0x20000000 -v -rst
+
