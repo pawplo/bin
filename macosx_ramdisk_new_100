@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ ! -d /Volumes/tmpdir ]; then
+    macosx_ramdisk_new tmpdir 100
+fi;
+
