@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ -f ~/.air ]; then
+    echo "*** air ***"
+    SYSROOT=~/sysroot
+    export LDFLAGS="-L${SYSROOT}/lib"
+    export CFLAGS="-I${SYSROOT}/include"
+    export CPPFLAGS="-I${SYSROOT}/include"
+#    export PKG_CONFIG_PATH="${SYSROOT}/pkgconfig:$PKG_CONFIG_PATH"
+#    export PATH="${SYSROOT}/bin_cc:${SYSROOT}/bin:$PATH"
+    export PATH="${SYSROOT}/bin:$PATH"
+    export PS1="[sysroot] $PS1"
+else
+    echo "???"
+fi;
+

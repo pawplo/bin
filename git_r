@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ -d .git ]; then
+    p=`pwd`
+    r=`basename $p`
+    echo $r
+    ssh root@r.lan "cd /overlay/git; if [ -d $r ]; then echo 'repo exists.'; exit 1; fi; mkdir $r; cd $r; git init --bare;"
+    git remote add r root@r.lan:/overlay/git/$r/
+else
+    echo .git !!!
+fi;
+

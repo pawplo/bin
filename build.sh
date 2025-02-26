@@ -13,7 +13,7 @@ function run()
 
 for i in `ls *.c 2>/dev/null`; do
     f=${i%*.c}
-    run gcc -c $i -o build/$f
+    run gcc $i -o build/$f
 done;
 
 for i in `ls *.go 2>/dev/null`; do
