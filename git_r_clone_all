@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ `uname -n` == "r" -o `uname -n` == "r2" ]; then
+    echo "bare/mirror host"
+    exir 1
+fi;
+
+cd ~/r/
+
+rs=`ssh root@r.lan ls /overlay/git/`
+for r in $rs; do
+    if [ -d $r ]; then
+        echo "fetch [$r]"
+        cd $r
+        git fetch
+        cd ..
+    else
+        echo "clone $r"
+        git clone $r
+    fi;
+done;

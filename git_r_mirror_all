@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ `uname -n` != "r2" ]; then
+    echo "unknown mirror host"
+    exir 1
+fi;
+
+cd /overlay/git/
+
+rs=`ssh root@r.lan ls /overlay/git/`
+for r in $rs; do
+    if [ -d $r ]; then
+        echo "fetch [$r]"
+        cd $r
+        git fetch
+        cd ..
+    else
+        echo "clone --mirror $r"
+        git clone --mirror $r
+    fi;
+done;
